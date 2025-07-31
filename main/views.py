@@ -29,13 +29,13 @@ def add(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save()
-    return redirect(index)
+    return redirect('index')
 
 @require_POST
 def delete(request, id):
     task = get_object_or_404(Task, id=id)
     task.delete()
-    return redirect(index)
+    return redirect('index')
 
 
 def edit(request, id):
@@ -46,18 +46,18 @@ def edit(request, id):
             form.save()
     else:
         form = TaskForm(instance=task)
-    return redirect(index)
+    return redirect('index')
 
 def complete(request, id):
     task = Task.objects.get(id=id)
     if request.method == "POST":
         task.completed = True
         task.save()
-    return redirect(index)
+    return redirect('index')
 
 def undo(request, id):
     task = Task.objects.get(id=id)
     if request.method == "POST":
         task.completed = False
         task.save()
-    return redirect(index)
+    return redirect('index')
