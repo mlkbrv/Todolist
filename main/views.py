@@ -29,6 +29,7 @@ def add(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save()
+
     return redirect('index')
 
 @require_POST
